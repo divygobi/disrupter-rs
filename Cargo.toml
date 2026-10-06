@@ -1,0 +1,15 @@
+[package]
+name = "lmax-disruptor"
+version = "0.1.0"
+edition = "2024"
+description = "A no_std port of the LMAX Disruptor for embedded and bare-metal targets"
+
+[lib]
+bench = false
+
+[workspace]
+members = ["bench-core"]
+
+[dependencies]
+# Native atomics where the target has them; lock-based 64-bit atomics where it doesn't.
+portable-atomic = { version = "1", default-features = false, features = ["fallback"] }

@@ -1,0 +1,29 @@
+[package]
+name = "bench-core"
+version = "0.1.0"
+edition = "2024"
+description = "Target-agnostic Disruptor benchmark scenarios"
+
+[lib]
+bench = false
+
+[features]
+# Host support: Instant-based clock, thread-per-task executor, crossbeam baseline.
+std = ["dep:crossbeam-queue"]
+
+[dependencies]
+lmax-disruptor = { path = ".." }
+heapless = "0.8"
+crossbeam-queue = { version = "0.3", optional = true }
+
+[dev-dependencies]
+criterion = "0.5"
+
+[[test]]
+name = "scenarios"
+required-features = ["std"]
+
+[[bench]]
+name = "disruptor"
+harness = false
+required-features = ["std"]
